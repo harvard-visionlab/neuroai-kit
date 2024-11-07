@@ -1,3 +1,3 @@
 from .version import *
 from .electrode import *
-from .dataset import *
+from .datasets import *
