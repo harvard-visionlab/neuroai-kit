@@ -1,2 +1,2 @@
-from .streaming_dataset import StreamingDatasetVisionlab
+from .streaming_dataset import StreamingDatasetVisionlab as StreamingDataset
 from .tardataset import TarDataset
