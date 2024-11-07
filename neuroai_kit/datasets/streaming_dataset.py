@@ -66,5 +66,5 @@ class StreamingDatasetVisionlab(StreamingDataset):
                         lines += [f"{tab}pil_image = Image.open(io.BytesIO(sample['{key}']))"]
             else:
                 lines += [f"{tab}pil_image = Image.open(io.BytesIO(sample[0]))"]
-                
+            
         return "\n".join(lines)
