@@ -114,11 +114,11 @@ def get_layer_shapes(model, layer_names, x):
     return shapes
 
 @torch.no_grad()
-def get_activations(model, imgs, layer_names=None):
+def get_activations(model, imgs, layer_names=None, **kwargs):
     if model.training:
         warnings.warn("Warning, you are running your model in 'train' mode. You should probably use model.eval()")
 
-    with NeuroElectrodeArray(model, layer_names) as electrode:
+    with NeuroElectrodeArray(model, layer_names, **kwargs) as electrode:
         activations = electrode(imgs)
 
     return activations
