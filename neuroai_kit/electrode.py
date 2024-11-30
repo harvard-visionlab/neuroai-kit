@@ -3,7 +3,7 @@ import torch.nn as nn
 import warnings
 from pdb import set_trace
 
-__all__ = ['NeuroElectrodeArray', 'get_layers', 'get_layer_names', 'get_layer_type', 'get_layer_shapes', 'get_activations']
+__all__ = ['NeuroElectrodeArray', 'get_layers', 'get_layer_names', 'get_layer_type', 'get_layer_shapes', 'get_activations','get_train_activations']
 
 class NeuroElectrodeArray(nn.Module):
     '''
@@ -119,6 +119,12 @@ def get_activations(model, imgs, layer_names=None, **kwargs):
         warnings.warn("Warning, you are running your model in 'train' mode. You should probably use model.eval()")
 
     with NeuroElectrodeArray(model, layer_names, **kwargs) as electrode:
+        activations = electrode(imgs)
+
+    return activations
+
+def get_train_activations(model, imgs, layer_names=None, device='cpu'):
+    with NeuroElectrodeArray(model, layer_names, clone=False, detach=False, device=device) as electrode:
         activations = electrode(imgs)
 
     return activations
