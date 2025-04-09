@@ -82,8 +82,8 @@ class NeuroElectrodeArray(nn.Module):
             self._activations[layer_id] = output
         return fn
 
-    def forward(self, x):
-        _ = self.model(x)
+    def forward(self, x, **kwargs):
+        _ = self.model(x, **kwargs)
         return self._activations
     
 def get_layers(model, parent_name=''):
@@ -118,8 +118,8 @@ def get_activations(model, imgs, layer_names=None, **kwargs):
     if model.training:
         warnings.warn("Warning, you are running your model in 'train' mode. You should probably use model.eval()")
 
-    with NeuroElectrodeArray(model, layer_names, **kwargs) as electrode:
-        activations = electrode(imgs)
+    with NeuroElectrodeArray(model, layer_names) as electrode:
+        activations = electrode(imgs, **kwargs)
 
     return activations
 
